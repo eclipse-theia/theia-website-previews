@@ -176,7 +176,7 @@ the frontend.</p>
 <p>Here we're creating a watcher, this is used to get notified about events
 from the backend by using the <code class="language-text">taskWatcher</code>'s client
 (<code class="language-text">taskWatcher.getTaskClient()</code>)</p>
-<p>See more information about how events work in theia <a href="/theia-website-previews/pr-previews/pr-540/docs/Events#events">here</a>.</p>
+<p>See more information about how events work in theia <a href="Events#events">here</a>.</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript">        <span class="token keyword">return</span> connection<span class="token punctuation">.</span>createProxy<span class="token operator">&lt;</span>TaskServer<span class="token operator">></span><span class="token punctuation">(</span>taskPath<span class="token punctuation">,</span> taskWatcher<span class="token punctuation">.</span><span class="token function">getTaskClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>As the second argument, we pass a local object to handle RPC messages from the remote object.
 Sometimes the local object depends on the proxy and cannot be instantiated before the proxy is instantiated.

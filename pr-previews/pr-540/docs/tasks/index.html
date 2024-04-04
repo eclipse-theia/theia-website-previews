@@ -58,7 +58,7 @@ Similar to <a href="https://code.visualstudio.com/docs/editor/tasks" target="_bl
 <p>In Eclipse Theia, tasks can also be provided from and executed by custom Theia extensions.
 In particular, Theia offers the three main contribution points for tasks: <code class="language-text">TaskProvider</code>, <code class="language-text">TaskResolver</code> and <code class="language-text">TaskRunner</code>.
 To better understand the purpose of those, let’s look at the flow, through the involved components, when a user selects and executes a task in the following figure.</p>
-<img src="../tasks.png" alt="Task flow overview" style="max-width: 915px">
+<img src="../../tasks.png" alt="Task flow overview" style="max-width: 915px">
 <p>Besides the user-defined task configurations, Eclipse Theia will also offer its users all task configurations collected from the registered task providers.
 When a user selects one of the provided task configurations and executes it, the configuration will be handed over to the task service, which will first resolve the selected task configuration using a resolver that is registered for the selected task configuration’s type.
 A task resolver can manipulate the task configuration before it is actually executed.
@@ -156,7 +156,7 @@ Using the existing interface <code class="language-text">Task</code> allows us t
    …
 <span class="token punctuation">}</span></code></pre></div>
 <p>As you can see in the screenshot below, our custom task is running for 5000 ms (as we set a timeout in <code class="language-text">MyTask</code>) and then it stops.</p>
-<img src="../running-custom-task.gif" alt="Running custom task" style="max-width: 702px">
+<img src="../../running-custom-task.gif" alt="Running custom task" style="max-width: 702px">
 <p>As can be seen in the console output, the task starts and finishes 5000 ms later, and prints the custom variable that has been added by the custom resolver.</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">root INFO Start running custom task: 42
 root INFO Finished running custom task: 42</code></pre></div>
