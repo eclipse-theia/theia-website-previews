@@ -99,7 +99,7 @@
 <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">SampleFilterContribution</span> <span class="token keyword">implements</span> <span class="token class-name">FilterContribution</span> <span class="token punctuation">{</span>
 
     <span class="token function">registerContributionFilters</span><span class="token punctuation">(</span>registry<span class="token operator">:</span> ContributionFilterRegistry<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
-        registry<span class="token punctuation">.</span><span class="token function">addFilters</span><span class="token punctuation">(</span><span class="token string">'*'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>
+        registry<span class="token punctuation">.</span><span class="token function">addFilters</span><span class="token punctuation">(</span><span class="token punctuation">[</span>CommandContribution<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>
             <span class="token parameter">contrib</span> <span class="token operator">=></span> <span class="token operator">!</span><span class="token punctuation">(</span>contrib <span class="token keyword">instanceof</span> <span class="token class-name">SampleFilteredCommandContribution</span><span class="token punctuation">)</span>
         <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
