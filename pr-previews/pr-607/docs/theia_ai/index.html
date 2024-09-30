@@ -52,10 +52,10 @@
 <p>This section explains how to build custom AI assistants and integrate AI support into custom tools and IDEs using Theia AI. Theia AI, part of the Theia Platform, is a powerful framework designed to help tool builders integrate tailored AI capabilities into their tools and IDEs with ease. It provides reusable components, prompt management, LLM integration, and flexible user interfaces, allowing you to focus on delivering domain-specific AI features. This section is targeted at tool builders using Theia and Theia AI as a platform to build custom tools and IDEs.
 For detailed information on how to use the experimental AI features in the Theia IDE as an end user, refer to the <a href="/theia-website-previews/pr-previews/pr-607/docs/user_ai/">user documentation</a>.
 To learn how to generally extend Theia by creating Theia extensions, including AI ones, visit the <a href="/theia-website-previews/pr-previews/pr-607/docs/authoring_extensions/">extension authoring guide</a>.</p>
-<img src="../../theia-ai-architecture.png" alt="High Level Architecture of Theia AI" style="max-width: 525px">
+<img src="../../theia-ai-architecture.png" alt="High Level Architecture of Theia AI" style="max-width: 650px">
+High Level Architecture of Theia AI
 <h2 id="table-of-contents" style="position:relative;"><a href="#table-of-contents" aria-label="table of contents permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Table of Contents</h2>
 <ul>
-<li><a href="#building-custom-ai-assistants-and-ai-support-with-theia-ai">Building Custom AI assistants and AI support with Theia AI</a></li>
 <li>
 <p><a href="#creating-agents-with-theia-ai">Creating Agents with Theia AI</a></p>
 <ul>
@@ -150,24 +150,15 @@ Now we can simply use our agent-specific variable in our prompt templates, e.g. 
 These are the available commands:
 Begin List:
 {{command-ids}}
-End List
-
-
-```md
-
-If an agent uses agent-specific variables, it can decide to explicitly declare them. This enables one to keep track of used variables and optionally even show this information to the user (see example screenshot below). 
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>../../used-variables-command-agent.png<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Used variables in Theia AI<span class="token punctuation">"</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">max-width</span><span class="token punctuation">:</span> 525px</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-
-To declare an agent-specific variable, simply add it like this in the constructor of your agents, along with an optional description and whether it is used in the prompt template or not.
-
-
-```ts
-this.agentSpecificVariables = [{
-           name: 'command-ids',
-           description: 'The list of available commands in Theia.',
-           usedInPrompt: true
-       }];</code></pre></div>
+End List</code></pre></div>
+<p>If an agent uses agent-specific variables, it can decide to explicitly declare them. This enables one to keep track of used variables and optionally even show this information to the user (see example screenshot below). </p>
+<img src="../../used-variables-command-agent.png" alt="Used variables in Theia AI" style="max-width: 525px">
+<p>To declare an agent-specific variable, simply add it like this in the constructor of your agents, along with an optional description and whether it is used in the prompt template or not.</p>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">this</span><span class="token punctuation">.</span>agentSpecificVariables <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+           name<span class="token operator">:</span> <span class="token string">'command-ids'</span><span class="token punctuation">,</span>
+           description<span class="token operator">:</span> <span class="token string">'The list of available commands in Theia.'</span><span class="token punctuation">,</span>
+           usedInPrompt<span class="token operator">:</span> <span class="token boolean">true</span>
+       <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <h4 id="global-variables" style="position:relative;"><a href="#global-variables" aria-label="global variables permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Global Variables</h4>
 <p>Global variables are available to all agents. Therefore, they are provided as a dedicated contribution. In the following, we will define a simple global variable that resolves to the current date, i.e. to the time when the variable get resolved in a request. You can review the <a href="https://github.com/eclipse-theia/theia/blob/master/packages/ai-core/src/common/today-variable-contribution.ts" target="_blank" rel="nofollow noopener noreferrer">full code of this variable</a> for a complete description.
 A Global variable basically consists of four parts.</p>
@@ -252,7 +243,7 @@ A Global variable basically consists of four parts.</p>
 <p>This section explains the process of converting an LLM (Large Language Model) response into custom UI controls within the Theia AI default chat (or any custom chat implementation). Custom UI control can be specially highlighted text, clickable buttons or literally anything that you want to display to your users.
 As an example, we will use the command chat agent used in this documentation before, which is capable of identifying a command in the Theia IDE based on the user's request. We will augment this agent to render commands that the agent returns as buttons. By clicking the button, users can then directly invoke a command.</p>
 <p>Let’s look at the basic control flow of a chat request in Theia AI (see diagram below). The flow starts with a user request in the default Chat UI (1), which is sent to the underlying LLM (2) to return an answer (3). By default, the agent can forward the response to the Chat UI as-is. However, in our scenario, the agent will parse the response and augment it with a structured response content (4). Based on this, the chat UI can select a corresponding response part renderer to be shown in the UI (5).</p>
-<img src="../../architecture-renderers.png" alt="Request Response flow in Theia AI" style="max-width: 525px">
+<img src="../../architecture-renderers.png" alt="Request Response flow in Theia AI" style="max-width: 650px">
 <p>In the following, we will dive into the details on how to implement this flow.</p>
 <h3 id="develop-a-reliable-prompt" style="position:relative;"><a href="#develop-a-reliable-prompt" aria-label="develop a reliable prompt permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Develop a Reliable Prompt</h3>
 <p>The first step to enable structured response parsing is developing a prompt that reliably returns the expected output. In this case, the output should include an executable Theia command related to the user's question in JSON format. The response needs to be in a parsable format, allowing the system to detect the command and provide the user with the option to execute it.</p>
