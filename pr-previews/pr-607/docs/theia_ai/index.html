@@ -202,8 +202,6 @@ First<span class="token punctuation">,</span> we define the variable<span class=
    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-Finally<span class="token punctuation">,</span> we register our variable provider <span class="token keyword">in</span> Theia like <span class="token keyword">this</span><span class="token operator">:</span>
-
 <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token template-punctuation string">`</span></span>`ts
 <span class="token function">bind</span><span class="token punctuation">(</span>AIVariableContribution<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">to</span><span class="token punctuation">(</span>TodayVariableContribution<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">inSingletonScope</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>It can now be used in any prompt template, as well as in user requests.</p>
