@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkTheia_Website=self.webpackChunkTheia_Website||[]).push([[824],{2074:function(e,t,a){a.r(t);a(6540);var r=a(9140),n=a(3451),s=a(7437);t.default=e=>{let{data:t}=e;const a=t.markdownRemark.fields.slug;let l=(0,n.v)(a);return"architecture"===a&&(l.prev="/docs/",l.prevTitle="Introduction"),(0,s.Y)(r.A,{canonical:`/docs/${t.markdownRemark.fields.slug}/`,context:l},(0,s.Y)("div",{dangerouslySetInnerHTML:{__html:t.markdownRemark.html}}))}}}]);
-//# sourceMappingURL=component---src-templates-doc-js-511233e88d25147c1234.js.map
