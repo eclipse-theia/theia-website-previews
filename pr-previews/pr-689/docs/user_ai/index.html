@@ -287,18 +287,17 @@ For a list of available MCP servers, visit the <a href="https://github.com/model
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">~{mcp_brave-search_brave_web_search}</code></pre></div>
 <p>This allows you to seamlessly integrate external services into your AI workflows within the Theia IDE.</p>
 <h2 id="scanoss" style="position:relative;"><a href="#scanoss" aria-label="scanoss permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SCANOSS</h2>
-<p>The Theia IDE (and Theia AI) integrates a code scanner powered by SCANOSS, enabling developers to analyze generated code snippets for open-source compliance and licensing. This feature supports developers to be informed about potential licensing implications when using generated code in the chat view.</p>
-<p>Please note: This will send a hash of suggested code snippets to the SCANOSS service hosted by the <a href="https://www.softwaretransparency.org/osskb" target="_blank" rel="nofollow noopener noreferrer">Software Transparency foundation</a> for analysis.
-This service is free to use. While individual developers are unlikely to reach usage limits, very massive use may trigger rate limiting. Furthermore, neither Theia nor SCANOSS can guarantee at all that there no license implications, even if the scan does not show them.</p>
+<p>The Theia IDE (and Theia AI) integrates a code scanner powered by SCANOSS, enabling developers to analyze generated code snippets for open-source compliance and licensing. This feature helps developers understand potential licensing implications when using generated code in the Chat view.</p>
+<p><strong>Please note:</strong> This feature sends a hash of suggested code snippets to the SCANOSS service hosted by the <a href="https://www.softwaretransparency.org/osskb" target="_blank" rel="nofollow noopener noreferrer">Software Transparency Foundation</a> for analysis. While the service is free to use, very high usage may trigger rate limiting (unlikely for individual developers). Additionally, neither Theia nor SCANOSS can guarantee that no license implications exist, even if no issues are detected during the scan.</p>
 <h3 id="configure-scanoss-in-the-theia-ide" style="position:relative;"><a href="#configure-scanoss-in-the-theia-ide" aria-label="configure scanoss in the theia ide permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configure SCANOSS in the Theia IDE</h3>
 <ol>
-<li>Open the Preferences panel in the Theia IDE.</li>
-<li>Navigate to SCANOSS Mode under the AI Features section.</li>
+<li>Open the <strong>Settings</strong> panel in the Theia IDE.</li>
+<li>Navigate to <strong>SCANOSS Mode</strong> under the <strong>AI Features</strong> section.</li>
 <li>Select the desired mode:
 <ul>
-<li>Off: Disables SCANOSS completely.</li>
-<li>Manual: Allows users to trigger scans manually via the SCANOSS button on generated code snippets in the Chat view.</li>
-<li>Automatic: Scans generated code snippets in chat views automatically.</li>
+<li><strong>Off</strong>: Disables SCANOSS completely.</li>
+<li><strong>Manual</strong>: Allows users to trigger scans manually via the SCANOSS button on generated code snippets in the Chat view.</li>
+<li><strong>Automatic</strong>: Automatically scans generated code snippets in the Chat view.</li>
 </ul>
 </li>
 </ol>
@@ -306,13 +305,18 @@ This service is free to use. While individual developers are unlikely to reach u
 <p>To manually scan a code snippet:</p>
 <ol>
 <li>Generate a code snippet in the AI Chat view.</li>
-<li>Click the <strong>SCANOSS</strong> button in the toolbar of the code renderer embedded in the chat.</li>
-<li>If a match is found, a warning icon will be displayed, otherwise a green check mark (see screenshot below)</li>
-<li>In case of a warning, click the <strong>SCANOSS</strong> button again to display the scan results in a popup window, showing any matches found in the SCANOSS database.</li>
+<li>Click the <strong>SCANOSS</strong> button in the toolbar of the code renderer embedded in the Chat view.</li>
+<li>A result icon will appear:
+<ul>
+<li>A <strong>warning icon</strong> if a match is found.</li>
+<li>A <strong>green check mark</strong> if no matches are found.</li>
+</ul>
+</li>
+<li>If a warning icon is displayed, click the <strong>SCANOSS</strong> button again to view detailed scan results in a popup window.</li>
 </ol>
 <img src="../../scanoss.png" alt="Scanning generated code snippets in the Theia AI chat view" style="max-width: 525px">
 <h3 id="automatic-scanning" style="position:relative;"><a href="#automatic-scanning" aria-label="automatic scanning permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Automatic Scanning</h3>
-<p>In <strong>Automatic</strong> mode, SCANOSS scans code snippets in the background whenever they are generated in the chat. The result is immediately displayed if any matches are found.</p>
+<p>In <strong>Automatic</strong> mode, SCANOSS scans code snippets in the background whenever they are generated in the Chat view. Results are displayed immediately, indicating whether any matches are found.</p>
 <h3 id="understanding-scanoss-results" style="position:relative;"><a href="#understanding-scanoss-results" aria-label="understanding scanoss results permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Understanding SCANOSS Results</h3>
 <p>After a scan is completed, SCANOSS provides a detailed summary, including:</p>
 <ul>
