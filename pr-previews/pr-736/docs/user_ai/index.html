@@ -64,6 +64,8 @@
 <li><a href="#openai-hosted-by-openai">OpenAI (Hosted by OpenAI)</a></li>
 <li><a href="#openai-compatible-models-eg-via-vllm">OpenAI Compatible Models (e.g. via VLLM)</a></li>
 <li><a href="#azure">Azure</a></li>
+<li><a href="#mistral-models">Mistral</a></li>
+<li><a href="#vercel-ai">Vercel AI</a></li>
 <li><a href="#anthropic">Anthropic</a></li>
 <li><a href="#google-ai">Google AI</a></li>
 <li><a href="#hugging-face">Hugging Face</a></li>
@@ -161,6 +163,20 @@
     <td>Public</td>
   </tr>
   <tr>
+    <td>Mistral (via OpenAI Compatible)</td>
+    <td>✅</td>
+    <td>✅</td>
+    <td>✅</td>
+    <td>Public</td>
+  </tr>
+  <tr>
+    <td><a href="#vercel-ai">Vercel AI</a></td>
+    <td>✅</td>
+    <td>✅</td>
+    <td>✅</td>
+    <td>Experimental</td>
+  </tr>
+  <tr>
     <td><a href="#anthropic">Anthropic</a></td>
     <td>✅</td>
     <td>✅</td>
@@ -220,6 +236,79 @@ Please also note that creating an API key requires a paid subscription, and usin
 <span class="token punctuation">}</span></code></pre></div>
 <h3 id="azure" style="position:relative;"><a href="#azure" aria-label="azure permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Azure</h3>
 <p>All models hosted on Azure that are compatible with the OpenAI API are accessible via the <a href="#openai-compatible-models-eg-via-vllm">Provider for OpenAI Compatible Models</a> provider. Note that some models hosted on Azure may require different settings for the system message, which are detailed in the <a href="#openai-compatible-models-eg-via-vllm">OpenAI Compatible Models</a> section and the <a href="https://github.com/eclipse-theia/theia/tree/master/packages/ai-openai#azure-openai" target="_blank" rel="nofollow noopener noreferrer">Readme</a>.</p>
+<h3 id="mistral-models" style="position:relative;"><a href="#mistral-models" aria-label="mistral models permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mistral Models</h3>
+<p>Mistral models (including on "La Platforme") can be used via the OpenAI API and support the same feature set. Here is an example configuration:</p>
+<div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token property">"ai-features.openAiCustom.customOpenAiModels"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">"model"</span><span class="token operator">:</span> <span class="token string">"mistral-large-latest"</span><span class="token punctuation">,</span>
+        <span class="token property">"url"</span><span class="token operator">:</span> <span class="token string">"https://api.mistral.ai/v1"</span><span class="token punctuation">,</span>
+        <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"Mistral"</span><span class="token punctuation">,</span>
+        <span class="token property">"apiKey"</span><span class="token operator">:</span> <span class="token string">"YourAPIKey"</span><span class="token punctuation">,</span>
+        <span class="token property">"developerMessageSettings"</span><span class="token operator">:</span> <span class="token string">"system"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">"model"</span><span class="token operator">:</span> <span class="token string">"codestral-latest"</span><span class="token punctuation">,</span>
+        <span class="token property">"url"</span><span class="token operator">:</span> <span class="token string">"https://codestral.mistral.ai/v1"</span><span class="token punctuation">,</span>
+        <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"Codestral"</span><span class="token punctuation">,</span>
+        <span class="token property">"apiKey"</span><span class="token operator">:</span> <span class="token string">"YourAPIKey"</span><span class="token punctuation">,</span>
+        <span class="token property">"developerMessageSettings"</span><span class="token operator">:</span> <span class="token string">"system"</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span></code></pre></div>
+<h3 id="vercel-ai" style="position:relative;"><a href="#vercel-ai" aria-label="vercel ai permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Vercel AI</h3>
+<p><strong>Note: The Vercel AI provider is currently experimental. We are evaluating replacing some existing providers to reduce maintenance effort. Please try this provider and provide feedback to help us stabilize it.</strong></p>
+<p>The Vercel AI provider offers a unified way of communicating with LLMs through the Vercel AI SDK framework. It serves as an alternative to other providers and currently supports OpenAI and Anthropic APIs with both official and custom endpoints.</p>
+<h4 id="api-key-configuration" style="position:relative;"><a href="#api-key-configuration" aria-label="api key configuration permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>API Key Configuration</h4>
+<p>If you already have your OpenAI or Anthropic API keys set as environment variables (<code class="language-text">OPENAI_API_KEY</code> or <code class="language-text">ANTHROPIC_API_KEY</code>), no additional configuration is required for the Vercel provider.</p>
+<p>If you configure your API keys through the settings, you need to explicitly set the API keys for the Vercel provider:</p>
+<ol>
+<li>Go to <strong>Preferences</strong> => <strong>AI features</strong> => <strong>Vercel AI</strong></li>
+<li>Set your OpenAI and/or Anthropic API keys</li>
+</ol>
+<h4 id="vercel-ai-official-models-configuration" style="position:relative;"><a href="#vercel-ai-official-models-configuration" aria-label="vercel ai official models configuration permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Vercel AI: Official Models Configuration</h4>
+<p>The Vercel provider includes the most common OpenAI and Anthropic models by default. To add new official models, configure them in your <code class="language-text">settings.json</code>:</p>
+<div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"ai-features.vercelAi.officialModels"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"vercel/openai/new-gpt"</span><span class="token punctuation">,</span>
+      <span class="token property">"model"</span><span class="token operator">:</span> <span class="token string">"new-gpt"</span><span class="token punctuation">,</span>
+      <span class="token property">"provider"</span><span class="token operator">:</span> <span class="token string">"openai"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span></code></pre></div>
+<h4 id="vercel-ai-custom-models-configuration" style="position:relative;"><a href="#vercel-ai-custom-models-configuration" aria-label="vercel ai custom models configuration permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Vercel AI: Custom Models Configuration</h4>
+<p>The Vercel provider supports custom models compatible with the Vercel AI SDK. Configure custom endpoints in your <code class="language-text">settings.json</code>:</p>
+<div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"ai-features.vercelAi.customModels"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"model"</span><span class="token operator">:</span> <span class="token string">"custom-model-name"</span><span class="token punctuation">,</span>
+      <span class="token property">"url"</span><span class="token operator">:</span> <span class="token string">"https://api.example.com/v1"</span><span class="token punctuation">,</span>
+      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"my-custom-model"</span><span class="token punctuation">,</span>
+      <span class="token property">"apiKey"</span><span class="token operator">:</span> <span class="token string">"your-api-key"</span><span class="token punctuation">,</span>
+      <span class="token property">"provider"</span><span class="token operator">:</span> <span class="token string">"openai"</span><span class="token punctuation">,</span>
+      <span class="token property">"supportsStructuredOutput"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">"enableStreaming"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"model"</span><span class="token operator">:</span> <span class="token string">"local-llama"</span><span class="token punctuation">,</span>
+      <span class="token property">"url"</span><span class="token operator">:</span> <span class="token string">"http://localhost:8000"</span><span class="token punctuation">,</span>
+      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"local-llama-model"</span><span class="token punctuation">,</span>
+      <span class="token property">"apiKey"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token property">"provider"</span><span class="token operator">:</span> <span class="token string">"openai"</span><span class="token punctuation">,</span>
+      <span class="token property">"supportsStructuredOutput"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token property">"enableStreaming"</span><span class="token operator">:</span> <span class="token boolean">false</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p><strong>Configuration Options:</strong></p>
+<ul>
+<li><strong><code class="language-text">model</code></strong> (required): The model identifier</li>
+<li><strong><code class="language-text">url</code></strong> (required): The API endpoint URL</li>
+<li><strong><code class="language-text">id</code></strong> (optional): Unique identifier for the UI. If not provided, <code class="language-text">model</code> will be used</li>
+<li><strong><code class="language-text">apiKey</code></strong> (optional): API key for the endpoint. Use <code class="language-text">true</code> to use the global API key</li>
+<li><strong><code class="language-text">provider</code></strong> (optional): Specify the provider type (<code class="language-text">openai</code>, <code class="language-text">anthropic</code>)</li>
+<li><strong><code class="language-text">supportsStructuredOutput</code></strong> (optional): Set to <code class="language-text">false</code> to disable structured output. Default: <code class="language-text">true</code></li>
+<li><strong><code class="language-text">enableStreaming</code></strong> (optional): Set to <code class="language-text">false</code> to disable streaming. Default: <code class="language-text">true</code></li>
+</ul>
 <h3 id="anthropic" style="position:relative;"><a href="#anthropic" aria-label="anthropic permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Anthropic</h3>
 <p>To enable Anthropics AI models in the Theia IDE, create an API key in your Anthropics API account (<a href="https://console.anthropic.com/" target="_blank" rel="nofollow noopener noreferrer">https://console.anthropic.com/</a>) and
 enter it in the Theia IDE settings under AI-features => Anthropics.</p>
@@ -392,9 +481,11 @@ Note that <code class="language-text">#file:src/my-code.ts</code> in the user me
 <p>Prompt fragments can recursively reference other fragments, variables, and tool functions, which is particularly useful for reusable additions to standard prompts, such as adding access to MCP servers.</p>
 <h2 id="custom-agents" style="position:relative;"><a href="#custom-agents" aria-label="custom agents permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Custom Agents</h2>
 <p>Custom agents enable users to define new chat agents with custom prompts on the fly, allowing the creation of custom workflows and extending the Theia IDE with new capabilities. These agents are immediately available in the default chat. For simpler workflows, you might also consider using <a href="#prompt-fragments">Prompt Fragments</a> instead.</p>
+<p>Custom agents can either be global (stored in the global prompt directory) or workspace-specific (stored in a workspace-specific directory). Workspace-specific custom agents take precedence in case the same id is used.</p>
 <p>To define a new custom agent, navigate to the AI Configuration View and click on "Add Custom Agent".</p>
 <img src="../../add-custom-agents.png" alt="Add a custom Agents in the Theia IDE" style="max-width: 400px">
-<p>This action opens a YAML file where all available custom agents are defined. Below is an example configuration:</p>
+<p>If workspace-specific prompt directories are configured in settings (see <a href="#prompt-template-and-fragment-locations">Prompt Template and Fragment Locations</a>), you can decide next where to add the custom agent.</p>
+<p>Next, a YAML file will be opened where all available custom agents in a specific directory are defined. Below is an example configuration:</p>
 <div class="gatsby-highlight" data-language="yaml"><pre class="language-yaml"><code class="language-yaml"><span class="token punctuation">-</span> <span class="token key atrule">id</span><span class="token punctuation">:</span> obfuscator
   <span class="token key atrule">name</span><span class="token punctuation">:</span> Obfuscator
   <span class="token key atrule">description</span><span class="token punctuation">:</span> This is an example agent. Please adapt the properties to fit your needs.
@@ -554,6 +645,6 @@ Please note that in a browser deployment MCP servers are scoped per connection, 
           <script
             id="gatsby-chunk-mapping"
           >
-            window.___chunkMapping="{\"app\":[\"/app-242a0cec0795f4c71ed2.js\"],\"component---src-pages-404-js\":[\"/component---src-pages-404-js-1c97c66d7998fb40d048.js\"],\"component---src-pages-blogs-js\":[\"/component---src-pages-blogs-js-d636a26158aeeb9701fa.js\"],\"component---src-pages-docs-js\":[\"/component---src-pages-docs-js-52ba16cfe819f11145bf.js\"],\"component---src-pages-index-js\":[\"/component---src-pages-index-js-1ca8ac196ce483b1b0ea.js\"],\"component---src-pages-releases-js\":[\"/component---src-pages-releases-js-f77f2c38af00dc2f2dae.js\"],\"component---src-pages-resources-js\":[\"/component---src-pages-resources-js-c7af77e6cdc1dbd7f674.js\"],\"component---src-pages-support-js\":[\"/component---src-pages-support-js-af846162b1fc6f4a4b62.js\"],\"component---src-pages-theia-ai-js\":[\"/component---src-pages-theia-ai-js-1fba5667fc3f965c9660.js\"],\"component---src-pages-theia-platform-js\":[\"/component---src-pages-theia-platform-js-ebf80a365ca37de2c0ef.js\"],\"component---src-templates-doc-js\":[\"/component---src-templates-doc-js-0f91607553d4c7973801.js\"]}";
+            window.___chunkMapping="{\"app\":[\"/app-242a0cec0795f4c71ed2.js\"],\"component---src-pages-404-js\":[\"/component---src-pages-404-js-1c97c66d7998fb40d048.js\"],\"component---src-pages-blogs-js\":[\"/component---src-pages-blogs-js-d636a26158aeeb9701fa.js\"],\"component---src-pages-docs-js\":[\"/component---src-pages-docs-js-52ba16cfe819f11145bf.js\"],\"component---src-pages-index-js\":[\"/component---src-pages-index-js-1778031788f7495786fc.js\"],\"component---src-pages-releases-js\":[\"/component---src-pages-releases-js-133aa883bc1cb1646c81.js\"],\"component---src-pages-resources-js\":[\"/component---src-pages-resources-js-c7af77e6cdc1dbd7f674.js\"],\"component---src-pages-support-js\":[\"/component---src-pages-support-js-af846162b1fc6f4a4b62.js\"],\"component---src-pages-theia-ai-js\":[\"/component---src-pages-theia-ai-js-e57b5ea11884b7f50b74.js\"],\"component---src-pages-theia-platform-js\":[\"/component---src-pages-theia-platform-js-b5e6ef9c3aa616a266f0.js\"],\"component---src-templates-doc-js\":[\"/component---src-templates-doc-js-0f91607553d4c7973801.js\"]}";
           </script>
-        <script>window.___webpackCompilationHash="82c245e96630ad56ca0f";</script><script src="/theia-website-previews/pr-previews/pr-736/webpack-runtime-be7c6a3f3be447dffb33.js" async></script><script src="/theia-website-previews/pr-previews/pr-736/framework-b17d9640783b6db8e77e.js" async></script><script src="/theia-website-previews/pr-previews/pr-736/app-242a0cec0795f4c71ed2.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
+        <script>window.___webpackCompilationHash="06cfe77a57650badc85a";</script><script src="/theia-website-previews/pr-previews/pr-736/webpack-runtime-59d6509b8c725a71c3f0.js" async></script><script src="/theia-website-previews/pr-previews/pr-736/framework-b17d9640783b6db8e77e.js" async></script><script src="/theia-website-previews/pr-previews/pr-736/app-242a0cec0795f4c71ed2.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
