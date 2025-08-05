@@ -457,7 +457,7 @@ End List</code></pre></div>
 <li>The Theia command corresponding to the parsed command ID is retrieved.</li>
 <li>A <code class="language-text">CommandChatResponseContentImpl</code> object is created to wrap the command.</li>
 </ul>
-<p>You can review the parsing code, including error handling  <a href="https://github.com/eclipse-theia/theia/blob/cbceb25a9d5c4b4a9b2d038574f974f9ad708421/packages/ai-ide/src/common/command-chat-agents.ts" target="_blank" rel="nofollow noopener noreferrer">here</a>)</p>
+<p>You can review the parsing code, including error handling  <a href="https://github.com/eclipse-theia/theia/blob/master/packages/ai-ide/src/common/command-chat-agents.ts" target="_blank" rel="nofollow noopener noreferrer">here</a>)</p>
 <p>Example code:</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> parsedCommand <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>jsonString<span class="token punctuation">)</span> <span class="token keyword">as</span> ParsedCommand<span class="token punctuation">;</span>
 <span class="token keyword">const</span> theiaCommand <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>commandRegistry<span class="token punctuation">.</span><span class="token function">getCommand</span><span class="token punctuation">(</span>parsedCommand<span class="token punctuation">.</span>commandId<span class="token punctuation">)</span><span class="token punctuation">;</span>
