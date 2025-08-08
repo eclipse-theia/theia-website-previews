@@ -129,7 +129,28 @@ Theia and the classic Eclipse IDE share the Eclipse Foundation name but have ent
 <li><strong>Theia adoption:</strong> Ideal if you want to deliver a fully integrated product — your own IDE or domain-specific tool — with full control over UI, features, AI integration, branding, and packaging.</li>
 </ul>
 <p>Theia lets you modify the entire application; VS Code extensions cannot.</p>
-<p><a href="https://www.eclipse.org/theia/docs/" target="_blank" rel="nofollow noopener noreferrer">Learn more →</a></p>
+<p><a href="/theia-website-previews/pr-previews/pr-828/docs/extensions/">Learn more →</a></p>
+</details>
+<h2 id="is-theia-just-another-vs-code-fork" style="position:relative;"><a href="#is-theia-just-another-vs-code-fork" aria-label="is theia just another vs code fork permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Is Theia just another VS Code fork?</h2>
+<p>No — Theia is not a fork of VS Code, but a separate, independently developed platform that shares some technologies.</p>
+<details> <summary>Longer answer</summary>
+While Theia and VS Code both use key open technologies like Monaco, the Language Server Protocol (LSP), and the Debug Adapter Protocol (DAP), Theia is not based on the VS Code codebase. Instead, it is:
+<ul>
+<li>
+<p>A separate architecture: Theia was built from scratch with a modular design that allows replacing or customizing any part of the application — from the frontend UI to the backend services.</p>
+</li>
+<li>
+<p>A platform first: Theia is primarily a framework for building custom tools and IDEs, not just a prebuilt editor.</p>
+</li>
+<li>
+<p>Governed openly: Theia is hosted by the vendor-neutral Eclipse Foundation with contributions from many companies; VS Code is controlled by Microsoft.</p>
+</li>
+<li>
+<p>Extension compatibility without forking: Theia runs most VS Code extensions via the Open VSX registry but does so without inheriting the constraints of a forked codebase.</p>
+</li>
+</ul>
+<p>In short, Theia gives you the flexibility of a platform, the familiarity of VS Code extensions, and the freedom of an open governance model — without the downsides of maintaining a fork.</p>
+<p><a href="https://eclipsesource.com/blogs/2024/12/17/is-it-a-good-idea-to-fork-vs-code/" target="_blank" rel="nofollow noopener noreferrer">Is Forking VS Code a Good Idea? →</a></p>
 </details>
 <h2 id="why-should-i-use-theia-and-not-just-fork-vs-code" style="position:relative;"><a href="#why-should-i-use-theia-and-not-just-fork-vs-code" aria-label="why should i use theia and not just fork vs code permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why should I use Theia and not just fork VS Code?</h2>
 <p>Forking VS Code is high-maintenance and loses Marketplace access; Theia offers flexibility without the burden.</p>
@@ -149,8 +170,7 @@ Theia and the classic Eclipse IDE share the Eclipse Foundation name but have ent
 <p><a href="https://eclipsesource.com/blogs/2024/12/17/is-it-a-good-idea-to-fork-vs-code/" target="_blank" rel="nofollow noopener noreferrer">Is Forking VS Code a Good Idea? →</a></p>
 </details>
 <h2 id="i-need-support-for-my-theia-based-tool-project" style="position:relative;"><a href="#i-need-support-for-my-theia-based-tool-project" aria-label="i need support for my theia based tool project permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>I need support for my Theia-based tool project.</h2>
-<p><strong>Short answer:</strong><br>
-Use community resources or <a href="/theia-website-previews/pr-previews/pr-828/support/">professional support</a>.</p>
+<p>Use community resources or <a href="/theia-website-previews/pr-previews/pr-828/support/">professional support</a>.</p>
 <details>
 <summary>Longer answer</summary>
 <ul>
