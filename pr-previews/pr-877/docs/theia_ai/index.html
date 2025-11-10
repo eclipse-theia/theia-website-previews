@@ -460,103 +460,77 @@ It is up to the agent to decide how this additional data is processed. Common pr
 <p>Finally, register your ‘ToolProvider’ like this:</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token function">bind</span><span class="token punctuation">(</span>ToolProvider<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">to</span><span class="token punctuation">(</span>FileContentFunction<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <h3 id="slash-commands" style="position:relative;"><a href="#slash-commands" aria-label="slash commands permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Slash Commands</h3>
-<p>Slash commands provide a user-friendly way to invoke prompt templates in the chat interface. They allow users to type <code class="language-text">/commandname arguments</code> instead of the more technical <code class="language-text">#prompt:fragmentid</code> syntax. Slash commands are internally converted to prompt variable references, maintaining compatibility with the existing Theia AI architecture.</p>
-<div style="text-align:center; margin-top: 1rem; margin-bottom: 1rem;">
-<video src="../../slash-commands.webm" width="100%" autoplay loop controls class="rounded-2"></video>
-<p style="font-style: italic; margin-top: 0.5rem;">Creating and using a simple slash command example.</p>
-</div>
-<h4 id="registering-slash-commands-as-prompt-templates" style="position:relative;"><a href="#registering-slash-commands-as-prompt-templates" aria-label="registering slash commands as prompt templates permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Registering Slash Commands as Prompt Templates</h4>
-<p>To create slash commands in your custom tool, define prompt templates with command metadata. Commands are registered as standard prompt fragments with additional metadata that marks them as executable commands:</p>
-<div class="gatsby-highlight" data-language="yaml"><pre class="language-yaml"><code class="language-yaml"><span class="token punctuation">---</span>
-<span class="token key atrule">isCommand</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
-<span class="token key atrule">commandName</span><span class="token punctuation">:</span> mycommand
-<span class="token key atrule">commandDescription</span><span class="token punctuation">:</span> Description of what this command does
-<span class="token key atrule">commandArgumentHint</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>optional hint about expected arguments<span class="token punctuation">]</span>
-<span class="token key atrule">commandAgents</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span> AgentId1
-  <span class="token punctuation">-</span> AgentId2
-<span class="token punctuation">---</span>
-Your prompt template content here.
-You can use $ARGUMENTS for all arguments<span class="token punctuation">,</span> or $1<span class="token punctuation">,</span> $2<span class="token punctuation">,</span> etc. for individual arguments.</code></pre></div>
-<p><strong>Required metadata:</strong></p>
-<ul>
-<li><strong><code class="language-text">isCommand: true</code></strong>: Marks the prompt template as a slash command</li>
-<li><strong><code class="language-text">commandName</code></strong>: The command name used in the chat (e.g., for <code class="language-text">/mycommand</code>)</li>
-<li><strong><code class="language-text">commandDescription</code></strong>: Description shown in autocomplete</li>
-</ul>
-<p><strong>Optional metadata:</strong></p>
-<ul>
-<li><strong><code class="language-text">commandArgumentHint</code></strong>: Hint text about expected arguments shown in autocomplete</li>
-<li><strong><code class="language-text">commandAgents</code></strong>: Array of agent IDs that can use this command. If omitted, the command is available globally to all agents</li>
-</ul>
+<p>Slash commands provide a user-friendly way to invoke prompt templates in the chat interface. They allow users to type <code class="language-text">/commandname arguments</code> instead of the more technical <code class="language-text">#prompt:fragmentid</code> syntax. For details on how end users use slash commands, see the <a href="/theia-website-previews/pr-previews/pr-877/docs/user_ai/#slash-commands">user documentation on slash commands</a>.</p>
+<p>Slash commands are registered as prompt templates with command-specific metadata using the <code class="language-text">PromptService</code>. Theia AI automatically provides autocomplete support, argument substitution, and agent-specific filtering.</p>
+<h4 id="command-metadata-interface" style="position:relative;"><a href="#command-metadata-interface" aria-label="command metadata interface permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command Metadata Interface</h4>
+<p>Slash commands use the <code class="language-text">CommandPromptFragmentMetadata</code> interface to define their properties:</p>
+<div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">CommandPromptFragmentMetadata</span> <span class="token punctuation">{</span>
+    isCommand<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">;</span>                    <span class="token comment">// Marks this as a slash command</span>
+    commandName<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>                <span class="token comment">// The command name (e.g., "explain" for /explain)</span>
+    commandDescription<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>         <span class="token comment">// Description shown in autocomplete</span>
+    commandArgumentHint<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>       <span class="token comment">// Optional hint about expected arguments</span>
+    commandAgents<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>           <span class="token comment">// Optional array of agent IDs that can use this command</span>
+<span class="token punctuation">}</span></code></pre></div>
+<h4 id="programmatic-registration-example" style="position:relative;"><a href="#programmatic-registration-example" aria-label="programmatic registration example permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Programmatic Registration Example</h4>
+<p>The following example shows how to programmatically register slash commands for an agent. This is adapted from the <a href="https://github.com/eclipse-theia/theia/pull/16541" target="_blank" rel="nofollow noopener noreferrer">Claude Code integration</a>, which registers static commands on startup:</p>
+<div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> PromptService <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@theia/ai-core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> inject<span class="token punctuation">,</span> injectable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@theia/core/shared/inversify'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token constant">MY_AGENT_ID</span> <span class="token operator">=</span> <span class="token string">'MyAgent'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">interface</span> <span class="token class-name">StaticSlashCommand</span> <span class="token punctuation">{</span>
+    name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+    description<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+    template<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span> <span class="token comment">// Optional template, defaults to `/${name}`</span>
+<span class="token punctuation">}</span>
+
+<span class="token decorator"><span class="token at operator">@</span><span class="token function">injectable</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MySlashCommandsContribution</span> <span class="token punctuation">{</span>
+    <span class="token decorator"><span class="token at operator">@</span><span class="token function">inject</span></span><span class="token punctuation">(</span>PromptService<span class="token punctuation">)</span>
+    <span class="token keyword">protected</span> <span class="token keyword">readonly</span> promptService<span class="token operator">:</span> PromptService<span class="token punctuation">;</span>
+
+    <span class="token keyword">protected</span> staticCommands<span class="token operator">:</span> StaticSlashCommand<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'clear'</span><span class="token punctuation">,</span> description<span class="token operator">:</span> <span class="token string">'Clear the current session'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'config'</span><span class="token punctuation">,</span> description<span class="token operator">:</span> <span class="token string">'Open configuration'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'help'</span><span class="token punctuation">,</span> description<span class="token operator">:</span> <span class="token string">'Show help information'</span><span class="token punctuation">,</span> template<span class="token operator">:</span> <span class="token string">'Provide help on: $ARGUMENTS'</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token function">onStart</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">registerStaticCommands</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">protected</span> <span class="token function">registerStaticCommands</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> command <span class="token keyword">of</span> <span class="token keyword">this</span><span class="token punctuation">.</span>staticCommands<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>promptService<span class="token punctuation">.</span><span class="token function">addBuiltInPromptFragment</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                id<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">my-agent-slash-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>command<span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+                template<span class="token operator">:</span> command<span class="token punctuation">.</span>template <span class="token operator">||</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>command<span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+                isCommand<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                commandName<span class="token operator">:</span> command<span class="token punctuation">.</span>name<span class="token punctuation">,</span>
+                commandDescription<span class="token operator">:</span> command<span class="token punctuation">.</span>description<span class="token punctuation">,</span>
+                commandAgents<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token constant">MY_AGENT_ID</span><span class="token punctuation">]</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
 <h4 id="argument-substitution" style="position:relative;"><a href="#argument-substitution" aria-label="argument substitution permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Argument Substitution</h4>
-<p>Slash commands support flexible argument substitution in prompt templates:</p>
+<p>Commands support flexible argument substitution in their templates:</p>
 <ul>
-<li><strong><code class="language-text">$ARGUMENTS</code></strong>: Replaced with all arguments as a single string</li>
+<li><strong><code class="language-text">$ARGUMENTS</code></strong>: All arguments as a single string</li>
 <li><strong><code class="language-text">$1</code>, <code class="language-text">$2</code>, <code class="language-text">$3</code>, ...</strong>: Individual positional arguments</li>
-<li><strong>Quoted arguments</strong>: Arguments containing spaces can be quoted: <code class="language-text">/hello "John Doe"</code> treats "John Doe" as a single $1</li>
+<li><strong>Quoted arguments</strong>: <code class="language-text">/hello "John Doe"</code> treats "John Doe" as <code class="language-text">$1</code></li>
 </ul>
-<p><strong>Example implementation:</strong></p>
-<div class="gatsby-highlight" data-language="yaml"><pre class="language-yaml"><code class="language-yaml"><span class="token punctuation">---</span>
-<span class="token key atrule">isCommand</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
-<span class="token key atrule">commandName</span><span class="token punctuation">:</span> compare
-<span class="token key atrule">commandDescription</span><span class="token punctuation">:</span> Compare two technologies or concepts
-<span class="token key atrule">commandArgumentHint</span><span class="token punctuation">:</span> technology1 technology2
-<span class="token key atrule">commandAgents</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span> Universal
-<span class="token punctuation">---</span>
-Compare and contrast $1 and $2.
-Provide a detailed analysis of their strengths<span class="token punctuation">,</span> weaknesses<span class="token punctuation">,</span> and use cases.</code></pre></div>
-<p>Usage: <code class="language-text">/compare React Vue</code></p>
-<ul>
-<li><code class="language-text">$1</code> resolves to "React"</li>
-<li><code class="language-text">$2</code> resolves to "Vue"</li>
-<li><code class="language-text">$ARGUMENTS</code> resolves to "React Vue"</li>
-</ul>
-<h4 id="programmatic-command-registration" style="position:relative;"><a href="#programmatic-command-registration" aria-label="programmatic command registration permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Programmatic Command Registration</h4>
-<p>While file-based command registration via prompt templates is the recommended approach for most use cases, you can also register commands programmatically by providing prompt templates with the <code class="language-text">CommandPromptFragmentMetadata</code> interface:</p>
-<div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> CommandPromptFragmentMetadata <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@theia/ai-core'</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> commandTemplate <span class="token operator">=</span> <span class="token punctuation">{</span>
-    id<span class="token operator">:</span> <span class="token string">'my-command'</span><span class="token punctuation">,</span>
-    template<span class="token operator">:</span> <span class="token string">'Process the following: $ARGUMENTS'</span><span class="token punctuation">,</span>
-    metadata<span class="token operator">:</span> <span class="token punctuation">{</span>
-        isCommand<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-        commandName<span class="token operator">:</span> <span class="token string">'process'</span><span class="token punctuation">,</span>
-        commandDescription<span class="token operator">:</span> <span class="token string">'Process input data'</span><span class="token punctuation">,</span>
-        commandArgumentHint<span class="token operator">:</span> <span class="token string">'data to process'</span><span class="token punctuation">,</span>
-        commandAgents<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'MyAgent'</span><span class="token punctuation">]</span>
-    <span class="token punctuation">}</span> <span class="token keyword">as</span> CommandPromptFragmentMetadata
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token comment">// Register via PromptService or as part of an agent's prompt fragments</span></code></pre></div>
-<h4 id="chat-input-integration" style="position:relative;"><a href="#chat-input-integration" aria-label="chat input integration permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Chat Input Integration</h4>
-<p>Theia AI automatically provides autocomplete support for slash commands in the chat input. The autocomplete:</p>
-<ul>
-<li>Triggers when users type <code class="language-text">/</code> in the chat</li>
-<li>Filters commands based on the currently pinned or mentioned agent</li>
-<li>Shows command descriptions and argument hints</li>
-<li>Updates dynamically as users type</li>
-</ul>
-<p>No additional implementation is required to enable autocomplete for your commands.</p>
-<h4 id="technical-implementation" style="position:relative;"><a href="#technical-implementation" aria-label="technical implementation permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Technical Implementation</h4>
-<p>Under the hood, slash commands are processed by the <code class="language-text">ChatRequestParser</code>, which:</p>
-<ol>
-<li>Recognizes <code class="language-text">/command [args]</code> syntax in chat input</li>
-<li>Converts it to the internal <code class="language-text">#prompt:commandName|args</code> format</li>
-<li>Passes it through the standard prompt variable resolution system</li>
-<li>The <code class="language-text">PromptVariableContribution</code> handles argument substitution with quote parsing</li>
-</ol>
-<p>This design ensures that slash commands integrate seamlessly with existing prompt templates, variables, and agent workflows without requiring separate handling logic.</p>
-<h4 id="example-use-cases" style="position:relative;"><a href="#example-use-cases" aria-label="example use cases permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example Use Cases</h4>
-<p>Slash commands are particularly useful for:</p>
-<ul>
-<li><strong>Common workflows</strong>: Pre-defined actions like <code class="language-text">/explain</code>, <code class="language-text">/refactor</code>, or <code class="language-text">/document</code></li>
-<li><strong>Domain-specific operations</strong>: Custom commands for your tool's domain (e.g., <code class="language-text">/deploy</code>, <code class="language-text">/analyze-performance</code>)</li>
-<li><strong>Multi-step processes</strong>: Commands that trigger complex agent interactions with consistent parameters</li>
-<li><strong>User convenience</strong>: Replacing repetitive prompt text with simple, memorable commands</li>
-</ul>
-<p>For a complete example implementation, see the <a href="https://github.com/eclipse-theia/theia/tree/master/examples/api-samples/src/browser/chat/" target="_blank" rel="nofollow noopener noreferrer">sample command contribution in the Theia repository</a>.</p>
+<p><strong>Example:</strong></p>
+<div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">this</span><span class="token punctuation">.</span>promptService<span class="token punctuation">.</span><span class="token function">addBuiltInPromptFragment</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    id<span class="token operator">:</span> <span class="token string">'compare-command'</span><span class="token punctuation">,</span>
+    template<span class="token operator">:</span> <span class="token string">'Compare and contrast $1 and $2 in detail.'</span><span class="token punctuation">,</span>
+    isCommand<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    commandName<span class="token operator">:</span> <span class="token string">'compare'</span><span class="token punctuation">,</span>
+    commandDescription<span class="token operator">:</span> <span class="token string">'Compare two technologies'</span><span class="token punctuation">,</span>
+    commandArgumentHint<span class="token operator">:</span> <span class="token string">'technology1 technology2'</span><span class="token punctuation">,</span>
+    commandAgents<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token constant">MY_AGENT_ID</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p>When a user types <code class="language-text">/compare React Vue</code>, this resolves to: "Compare and contrast React and Vue in detail."</p>
+<p>For a complete implementation including dynamic command loading from files, see the <a href="https://github.com/eclipse-theia/theia/pull/16541/files#diff-00607ac44abbafca2c82b97a2748c2707d53d68eR66" target="_blank" rel="nofollow noopener noreferrer">Claude Code slash commands contribution</a>.</p>
 <h2 id="custom-response-part-rendering" style="position:relative;"><a href="#custom-response-part-rendering" aria-label="custom response part rendering permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Custom Response Part Rendering</h2>
 <p>This section explains the process of converting an LLM (Large Language Model) response into custom UI controls within the Theia AI default chat (or any custom chat implementation). Custom UI control can be specially highlighted text, clickable buttons or literally anything that you want to display to your users.</p>
 <p>Learn more about the generic concept:</p>
