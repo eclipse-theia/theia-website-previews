@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkTheia_Website=self.webpackChunkTheia_Website||[]).push([[116],{8587:function(e,t,n){n.r(t),n.d(t,{Head:function(){return i}});n(6540);var r=n(9140),a=n(5226),c=n(7437);const i=a.A;t.default=e=>{let{data:t}=e;return(0,c.Y)(r.A,{canonical:"/docs/",context:{next:"/docs/architecture/",nextTitle:"Architecture Overview"}},(0,c.Y)("div",{dangerouslySetInnerHTML:{__html:t.markdownRemark.html}}))}}}]);
-//# sourceMappingURL=component---src-pages-docs-js-52ba16cfe819f11145bf.js.map
