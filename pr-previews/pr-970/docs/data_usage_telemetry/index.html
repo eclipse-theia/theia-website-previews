@@ -56,32 +56,12 @@
 <p>Theia 1.74 introduced a telemetry framework in the Theia platform, the framework that the Theia IDE and other tools are built on. The framework only provides the plumbing for reporting events within an application. It deliberately contains no destination to which data would be sent, and the Theia IDE does not add one.</p>
 <p>Tool builders who create their own product based on the Theia platform can add telemetry and tailor it to their needs, which requires implementing and shipping such a destination themselves. What is collected therefore depends entirely on the product you use. If you work with a Theia-based product other than the Theia IDE, consult its privacy policy and documentation for details about its data collection practices. Two preferences let you control what such a product may report.</p>
 <p><code class="language-text">telemetry.telemetryLevel</code> determines which kinds of events may be reported at all. It uses the same key and values as VS Code and defaults to <code class="language-text">off</code>:</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="language-text">off</code></td>
-<td>Nothing is reported. This is the default.</td>
-</tr>
-<tr>
-<td><code class="language-text">crash</code></td>
-<td>Crash reports only.</td>
-</tr>
-<tr>
-<td><code class="language-text">error</code></td>
-<td>Crash reports and error events.</td>
-</tr>
-<tr>
-<td><code class="language-text">all</code></td>
-<td>Crash reports, error events, and usage events.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong><code class="language-text">off</code></strong>: Nothing is reported. This is the default.</li>
+<li><strong><code class="language-text">crash</code></strong>: Crash reports only.</li>
+<li><strong><code class="language-text">error</code></strong>: Crash reports and error events.</li>
+<li><strong><code class="language-text">all</code></strong>: Crash reports, error events, and usage events.</li>
+</ul>
 <p><code class="language-text">telemetry.filters</code> allows switching off individual reporting destinations or restricting them to certain event topics. Products document which destinations they contribute and what they are called.</p>
 <p>Adopters looking for the technical details of the framework, including how to contribute a destination, find them in <a href="/theia-website-previews/pr-previews/pr-970/docs/telemetry">Telemetry</a>.</p>
 <h2 id="automatic-network-connections" style="position:relative;"><a href="#automatic-network-connections" aria-label="automatic network connections permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Automatic Network Connections</h2>
